@@ -1,0 +1,44 @@
+<script>
+function Sphere3D(radius) {
+    this.point = new Array();
+    this.color = "rgb(100,0,255)"
+    this.radius = (typeof(radius) == "undefined") ? 20.0 : radius;
+    this.radius = (typeof(radius) != "number") ? 20.0 : radius;
+    this.numberOfVertexes = 0;
+   
+    // Loop from 0 to 360 degrees with a pitch of 10 degrees ... 
+     for(alpha = 0; alpha <= 6.28; alpha += 0.17) {
+      p = this.point[this.numberOfVertexes] = new Point3D();
+   
+      p.x = Math.cos(alpha) * this.radius;
+      p.y = 0;
+      p.z = Math.sin(alpha) * this.radius;
+   
+      this.numberOfVertexes++;
+    }
+   
+    // Loop from 0 to 90 degrees with a pitch of 10 degrees ... 
+    // (direction = 1)
+   
+    // Loop from 0 to 90 degrees with a pitch of 10 degrees ...
+    // (direction = -1)
+   
+    for(var direction = 1; direction >= -1; direction -= 2) {
+      for(var beta = 0.17; beta < 1.445; beta += 0.17) {
+   
+        var radius = Math.cos(beta) * this.radius;
+        var fixedY = Math.sin(beta) * this.radius * direction;
+   
+        for(var alpha = 0; alpha < 6.28; alpha += 0.17) {
+          p = this.point[this.numberOfVertexes] = new Point3D();
+   
+          p.x = Math.cos(alpha) * radius;
+          p.y = fixedY;
+          p.z = Math.sin(alpha) * radius;
+   
+          this.numberOfVertexes++;
+        }
+      }
+    }
+   }
+</script>
